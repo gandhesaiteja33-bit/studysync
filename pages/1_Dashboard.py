@@ -1,10 +1,20 @@
+from utils.translator import get_text
+
 import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from database import get_assignments, get_attendance, get_exams
+from database import (
+    get_assignments,
+    get_attendance,
+    get_exams
+)
 
-st.title("🏠 StudySync AI Dashboard")
+# ==========================
+# PAGE TITLE
+# ==========================
+
+st.title(get_text("dashboard"))
 
 # ==========================
 # LOAD DATA
@@ -60,9 +70,11 @@ if not assignments_df.empty:
         ]
     )
 
-total_subjects = len(
-    attendance_df["subject"].unique()
-) if not attendance_df.empty else 0
+total_subjects = (
+    len(attendance_df["subject"].unique())
+    if not attendance_df.empty
+    else 0
+)
 
 avg_attendance = 0
 
@@ -83,25 +95,25 @@ col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     st.metric(
-        "📝 Assignments",
+        f"📝 {get_text('assignments')}",
         total_assignments
     )
 
 with col2:
     st.metric(
-        "⏳ Pending",
+        f"⏳ {get_text('pending')}",
         pending_assignments
     )
 
 with col3:
     st.metric(
-        "📚 Subjects",
+        f"📚 {get_text('subjects')}",
         total_subjects
     )
 
 with col4:
     st.metric(
-        "📊 Attendance %",
+        f"📊 {get_text('attendance_percent')}",
         avg_attendance
     )
 
@@ -115,14 +127,16 @@ colA, colB = st.columns(2)
 
 with colA:
 
-    st.subheader("📊 Assignment Status")
+    st.subheader(
+        f"📊 {get_text('assignment_status')}"
+    )
 
     if not assignments_df.empty:
 
         fig = px.pie(
             assignments_df,
             names="status",
-            title="Assignments"
+            title=get_text("assignments")
         )
 
         st.plotly_chart(
@@ -131,11 +145,15 @@ with colA:
         )
 
     else:
-        st.info("No assignments found")
+        st.info(
+            get_text("no_assignments")
+        )
 
 with colB:
 
-    st.subheader("📈 Attendance")
+    st.subheader(
+        f"📈 {get_text('attendance')}"
+    )
 
     if not attendance_df.empty:
 
@@ -143,7 +161,7 @@ with colB:
             attendance_df,
             x="subject",
             y="percentage",
-            title="Attendance by Subject"
+            title=get_text("attendance")
         )
 
         st.plotly_chart(
@@ -152,7 +170,9 @@ with colB:
         )
 
     else:
-        st.info("No attendance records")
+        st.info(
+            get_text("no_attendance")
+        )
 
 st.divider()
 
@@ -160,11 +180,15 @@ st.divider()
 # UPCOMING EXAMS
 # ==========================
 
-st.subheader("📅 Upcoming Exams")
+st.subheader(
+    f"📅 {get_text('upcoming_exams')}"
+)
 
 if exams_df.empty:
 
-    st.info("No exams scheduled")
+    st.info(
+        get_text("no_exams")
+    )
 
 else:
 
@@ -176,14 +200,18 @@ else:
 st.divider()
 
 # ==========================
-# RECENT ASSIGNMENTS
+# ASSIGNMENTS TABLE
 # ==========================
 
-st.subheader("📝 Assignments")
+st.subheader(
+    f"📝 {get_text('assignments')}"
+)
 
 if assignments_df.empty:
 
-    st.info("No assignments added")
+    st.info(
+        get_text("no_assignments")
+    )
 
 else:
 

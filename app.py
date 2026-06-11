@@ -1,4 +1,13 @@
+
 import streamlit as st
+if "language" not in st.session_state:
+    st.session_state["language"] = "English"
+
+st.sidebar.selectbox(
+    "Language",
+    ["English", "Hindi", "Telugu"],
+    key="language"
+)
 
 from auth import login_user, register_user
 from database import init_db
