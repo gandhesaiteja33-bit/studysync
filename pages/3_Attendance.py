@@ -1,11 +1,7 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
 
-from database import (
-    add_attendance,
-    get_attendance,
-    delete_attendance
-)
+from database import add_attendance, delete_attendance, get_attendance
 
 st.title("📊 Attendance Manager")
 

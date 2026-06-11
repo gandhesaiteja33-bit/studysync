@@ -1,6 +1,7 @@
 import streamlit as st
-from database import init_db
+
 from auth import login_user, register_user
+from database import init_db
 
 init_db()
 
@@ -69,5 +70,15 @@ else:
         st.rerun()
 
     st.info("👉 Go to sidebar pages to use the app")
+import streamlit as st
 
+if "language" not in st.session_state:
+    st.session_state.language = "English"
+
+language = st.sidebar.selectbox(
+    "Language",
+    ["English", "Hindi", "Telugu"]
+)
+
+st.session_state.language = language
     

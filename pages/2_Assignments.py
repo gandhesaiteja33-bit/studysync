@@ -1,11 +1,11 @@
-import streamlit as st
 import pandas as pd
+import streamlit as st
 
 from database import (
     add_assignment,
-    get_assignments,
     delete_assignment,
-    mark_assignment_complete
+    get_assignments,
+    mark_assignment_complete,
 )
 
 st.title("📝 Assignments")

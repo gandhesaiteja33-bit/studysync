@@ -1,11 +1,8 @@
-import streamlit as st
 import pandas as pd
 import plotly.express as px
-from database import (
-    get_assignments,
-    get_attendance,
-    get_exams
-)
+import streamlit as st
+
+from database import get_assignments, get_attendance, get_exams
 
 st.title("🏠 StudySync AI Dashboard")
 
