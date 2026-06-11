@@ -26,3 +26,16 @@ dependency_audit:
     - pip install pip-audit
   script:
     - pip-audit || true
+stages:
+  - lint
+  - typecheck
+  - audit
+  - test
+
+coverage:
+  image: python:3.11
+  stage: test
+  before_script:
+    - pip install pytest pytest-cov
+  script:
+    - pytest --cov=. --cov-report=term    
