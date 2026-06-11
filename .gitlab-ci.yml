@@ -13,3 +13,16 @@ typecheck:
   script:
     - pip install mypy
     - mypy .
+
+stages:
+  - lint
+  - typecheck
+  - security
+
+secret_scan:
+  image:
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  stage: security
+  script:
+    - gitleaks detect --source . --verbose    
