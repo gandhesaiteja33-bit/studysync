@@ -92,19 +92,15 @@ def init_db():
 
 def add_assignment(title, subject, due_date, priority):
     conn = get_connection()
-    cursor = conn.cursor()
 
-    cursor.execute("""
-    INSERT INTO assignments
-    (title, subject, due_date, priority, status)
-    VALUES (?, ?, ?, ?, ?)
-    """, (
-        title,
-        subject,
-        due_date,
-        priority,
-        "Pending"
-    ))
+    conn.execute(
+        """
+        INSERT INTO assignments
+        (title, subject, due_date, priority, status)
+        VALUES (?, ?, ?, ?, ?)
+        """,
+        (title, subject, due_date, priority, "Pending")
+    )
 
     conn.commit()
     conn.close()
@@ -118,8 +114,8 @@ def get_assignments():
     ).fetchall()
 
     conn.close()
-
     return rows
+
 
 def delete_assignment(assignment_id):
     conn = get_connection()
@@ -156,164 +152,6 @@ def mark_assignment_complete(assignment_id):
 def add_attendance(subject, conducted, attended):
     conn = get_connection()
 
-    conn.execute("""
-    INSERT INTO attendance
-    (subject, conducted, attended)
-    VALUES (?, ?, ?)
-    """, (
-        subject,
-        conducted,
-        attended
-    ))
-
-    conn.commit()
-    conn.close()
-
-
-def get_attendance():
-    conn = get_connection()
-
-    rows = conn.execute(
-        "SELECT * FROM attendance"
-    ).fetchall()
-
-    conn.close()
-
-    return rows
-
-
-# ==========================
-# GPA
-# ==========================
-
-def add_grade(subject, credits, grade):
-    conn = get_connection()
-
-    conn.execute("""
-    INSERT INTO grades
-    (subject, credits, grade)
-    VALUES (?, ?, ?)
-    """, (
-        subject,
-        credits,
-        grade
-    ))
-
-    conn.commit()
-    conn.close()
-
-
-def get_grades():
-    conn = get_connection()
-
-    rows = conn.execute(
-        "SELECT * FROM grades"
-    ).fetchall()
-
-    conn.close()
-
-    return rows
-
-
-# ==========================
-# EXAMS
-# ==========================
-
-def add_exam(subject, exam_date):
-    conn = get_connection()
-
-    conn.execute("""
-    INSERT INTO exams
-    (subject, exam_date)
-    VALUES (?, ?)
-    """, (
-        subject,
-        exam_date
-    ))
-
-    conn.commit()
-    conn.close()
-
-
-def get_exams():
-    conn = get_connection()
-
-    rows = conn.execute(
-        "SELECT * FROM exams"
-    ).fetchall()
-
-    conn.close()
-
-    return rows
-
-
-# ==========================
-# STUDY TASKS
-# ==========================
-
-def add_task(task):
-    conn = get_connection()
-
-    conn.execute("""
-    INSERT INTO study_tasks
-    (task, status)
-    VALUES (?, ?)
-    """, (
-        task,
-        "Pending"
-    ))
-
-    conn.commit()
-    conn.close()
-
-
-def get_tasks():
-    conn = get_connection()
-
-    rows = conn.execute(
-        "SELECT * FROM study_tasks"
-    ).fetchall()
-
-    conn.close()
-
-    return rows
-
-
-# ==========================
-# NOTES
-# ==========================
-
-def add_note(subject, file_name):
-    conn = get_connection()
-
-    conn.execute("""
-    INSERT INTO notes
-    (subject, file_name, uploaded_at)
-    VALUES (?, ?, ?)
-    """, (
-        subject,
-        file_name,
-        datetime.now().strftime("%Y-%m-%d %H:%M")
-    ))
-
-    conn.commit()
-    conn.close()
-
-
-def get_notes():
-    conn = get_connection()
-
-    rows = conn.execute(
-        "SELECT * FROM notes"
-    ).fetchall()
-
-    conn.close()
-
-    return rows
-
-def add_attendance(subject, conducted, attended):
-    conn = get_connection()
-
     conn.execute(
         """
         INSERT INTO attendance
@@ -335,7 +173,6 @@ def get_attendance():
     ).fetchall()
 
     conn.close()
-
     return rows
 
 
@@ -349,3 +186,131 @@ def delete_attendance(record_id):
 
     conn.commit()
     conn.close()
+
+
+# ==========================
+# GPA
+# ==========================
+
+def add_grade(subject, credits, grade):
+    conn = get_connection()
+
+    conn.execute(
+        """
+        INSERT INTO grades
+        (subject, credits, grade)
+        VALUES (?, ?, ?)
+        """,
+        (subject, credits, grade)
+    )
+
+    conn.commit()
+    conn.close()
+
+
+def get_grades():
+    conn = get_connection()
+
+    rows = conn.execute(
+        "SELECT * FROM grades"
+    ).fetchall()
+
+    conn.close()
+    return rows
+
+
+# ==========================
+# EXAMS
+# ==========================
+
+def add_exam(subject, exam_date):
+    conn = get_connection()
+
+    conn.execute(
+        """
+        INSERT INTO exams
+        (subject, exam_date)
+        VALUES (?, ?)
+        """,
+        (subject, exam_date)
+    )
+
+    conn.commit()
+    conn.close()
+
+
+def get_exams():
+    conn = get_connection()
+
+    rows = conn.execute(
+        "SELECT * FROM exams"
+    ).fetchall()
+
+    conn.close()
+    return rows
+
+
+# ==========================
+# STUDY TASKS
+# ==========================
+
+def add_task(task):
+    conn = get_connection()
+
+    conn.execute(
+        """
+        INSERT INTO study_tasks
+        (task, status)
+        VALUES (?, ?)
+        """,
+        (task, "Pending")
+    )
+
+    conn.commit()
+    conn.close()
+
+
+def get_tasks():
+    conn = get_connection()
+
+    rows = conn.execute(
+        "SELECT * FROM study_tasks"
+    ).fetchall()
+
+    conn.close()
+    return rows
+
+
+# ==========================
+# NOTES
+# ==========================
+
+def add_note(subject, file_name):
+    conn = get_connection()
+
+    conn.execute(
+        """
+        INSERT INTO notes
+        (subject, file_name, uploaded_at)
+        VALUES (?, ?, ?)
+        """,
+        (
+            subject,
+            file_name,
+            datetime.now().strftime("%Y-%m-%d %H:%M")
+        )
+    )
+
+    conn.commit()
+    conn.close()
+
+
+def get_notes():
+    conn = get_connection()
+
+    rows = conn.execute(
+        "SELECT * FROM notes"
+    ).fetchall()
+
+    conn.close()
+    return rows
