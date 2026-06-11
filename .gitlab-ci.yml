@@ -39,3 +39,10 @@ coverage:
     - pip install pytest pytest-cov
   script:
     - pytest --cov=. --cov-report=term    
+secret_scan:
+  image:
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  stage: audit
+  script:
+    - gitleaks detect --source . --no-git    
