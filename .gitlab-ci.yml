@@ -26,3 +26,13 @@ secret_scan:
   stage: security
   script:
     - gitleaks detect --source . --verbose    
+stages:
+  - audit
+
+dependency_audit:
+  image: python:3.11
+  stage: audit
+  before_script:
+    - pip install pip-audit
+  script:
+    - pip-audit    
