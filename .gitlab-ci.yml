@@ -1,11 +1,15 @@
 stages:
   - lint
+  - typecheck
 
 lint:
   image: python:3.11
-
-  before_script:
-    - pip install ruff
-
   script:
+    - pip install ruff
     - ruff check .
+
+typecheck:
+  image: python:3.11
+  script:
+    - pip install mypy
+    - mypy .
