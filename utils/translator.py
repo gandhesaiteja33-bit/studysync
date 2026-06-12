@@ -11,5 +11,20 @@ LANGUAGES = {
 }
 
 def get_text(key):
+    # get selected language safely
     lang = st.session_state.get("language", "English")
-    return LANGUAGES.get(lang, EN).get(key, key)
+
+    # get language dictionary, fallback to English
+    lang_dict = LANGUAGES.get(lang, EN)
+
+    # get translated value
+    value = lang_dict.get(key)
+
+    # fallback chain (VERY IMPORTANT)
+    if value is None:
+        value = EN.get(key)
+
+    if value is None:
+        value = key  # last fallback
+
+    return value
