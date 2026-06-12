@@ -1,5 +1,10 @@
-ruff
-mypy
-pip-audit
-pytest
-pytest-cov
+streamlit
+plotly
+pandas
+numpy
+requests
+bcrypt
+passlib
+python-dotenv
+babel
+ollama
