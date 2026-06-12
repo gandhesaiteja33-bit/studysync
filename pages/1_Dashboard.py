@@ -1,4 +1,5 @@
 from utils.translator import get_text
+from utils.translator import get_text
 
 import pandas as pd
 import plotly.express as px

@@ -12,4 +12,4 @@ LANGUAGES = {
 
 def get_text(key):
     lang = st.session_state.get("language", "English")
-    return LANGUAGES[lang].get(key, key)
+    return LANGUAGES.get(lang, EN).get(key, key)
