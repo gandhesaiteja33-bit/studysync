@@ -1,3 +1,6 @@
+from utils.session import init_session
+
+init_session()
 import streamlit as st
 
 from auth import login_user, register_user

@@ -1,3 +1,6 @@
+from utils.session import init_session
+
+init_session()
 import streamlit as st
 from ai.local_ai import local_ai
 from ai.cloud_ai import cloud_ai
