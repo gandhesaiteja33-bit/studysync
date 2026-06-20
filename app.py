@@ -1,59 +1,50 @@
-from utils.session import init_session
-
-init_session()
 import streamlit as st
 
+from utils.session import init_session
 from auth import login_user, register_user
 from database import init_db
-from utils.translator import get_text
+from utils.translator import get_text, init_language
 
 # ======================
-# DATABASE INIT
+# INIT
 # ======================
+init_session()
 init_db()
+init_language()
 
 # ======================
 # PAGE CONFIG
 # ======================
 st.set_page_config(
-    page_title="StudySync AI",
+    page_title=get_text("app_title"),
     page_icon="🎓",
     layout="wide"
 )
 
 # ======================
-# SESSION STATE
-# ======================
-if "logged_in" not in st.session_state:
-    st.session_state.logged_in = False
-
-if "username" not in st.session_state:
-    st.session_state.username = ""
-
-if "language" not in st.session_state:
-    st.session_state.language = "English"
-
-# ======================
-# SIDEBAR (FIXED)
+# SIDEBAR LANGUAGE
 # ======================
 
-# ❗ Language selector MUST NOT use get_text()
-st.sidebar.selectbox(
-    "Language",
+# Streamlit controls this automatically
+language = st.sidebar.selectbox(
+    get_text("language"),
     ["English", "Hindi", "Telugu"],
     key="language"
 )
 
-# Sidebar content (reactive)
-if st.session_state.logged_in:
+# NOTE:
+# No set_language() needed
+# Translator reads st.session_state["language"]
 
+# ======================
+# SIDEBAR USER INFO
+# ======================
+if st.session_state.get("logged_in", False):
     st.sidebar.success(
-        f"{get_text('logged_in_as')} {st.session_state.username}"
+        f"{get_text('logged_in_as')} {st.session_state.get('username', '')}"
     )
 
     st.sidebar.info(get_text("sidebar_navigation"))
-
-    st.sidebar.divider()
 
     if st.sidebar.button(get_text("logout"), key="logout_button"):
         st.session_state.logged_in = False
@@ -69,69 +60,45 @@ st.caption(get_text("app_caption"))
 # ======================
 # AUTH SYSTEM
 # ======================
-if not st.session_state.logged_in:
+if not st.session_state.get("logged_in", False):
 
     tab1, tab2 = st.tabs([
         get_text("login"),
         get_text("register")
     ])
 
-    # ----------------------
-    # LOGIN TAB
-    # ----------------------
+    # LOGIN
     with tab1:
-
         st.subheader(get_text("login"))
 
-        username = st.text_input(
-            get_text("username"),
-            key="login_username"
-        )
-
-        password = st.text_input(
-            get_text("password"),
-            type="password",
-            key="login_password"
-        )
+        username = st.text_input(get_text("username"), key="login_username")
+        password = st.text_input(get_text("password"), type="password", key="login_password")
 
         if st.button(get_text("login"), key="login_button"):
+            success, user = login_user(username, password)
 
-            user = login_user(username, password)
-
-            if user:
+            if success:
                 st.session_state.logged_in = True
                 st.session_state.username = user[1]
-
                 st.success(get_text("login_success"))
                 st.rerun()
-
             else:
-                st.error(get_text("invalid_credentials"))
+                st.error(get_text(user))
 
-    # ----------------------
-    # REGISTER TAB
-    # ----------------------
+    # REGISTER
     with tab2:
-
         st.subheader(get_text("register"))
 
-        new_user = st.text_input(
-            get_text("username"),
-            key="register_username"
-        )
-
-        new_pass = st.text_input(
-            get_text("password"),
-            type="password",
-            key="register_password"
-        )
+        new_user = st.text_input(get_text("username"), key="register_username")
+        new_pass = st.text_input(get_text("password"), type="password", key="register_password")
 
         if st.button(get_text("register"), key="register_button"):
+            success, msg = register_user(new_user, new_pass)
 
-            register_user(new_user, new_pass)
-
-            st.success(get_text("registered_success"))
+            if success:
+                st.success(get_text(msg))
+            else:
+                st.error(get_text(msg))
 
 else:
-
     st.info(get_text("go_to_sidebar"))

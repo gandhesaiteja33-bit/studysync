@@ -1,6 +1,35 @@
 {
+  "app_title": "StudySync AI",
+  "app_caption": "Your AI-powered learning assistant",
+
+  "language": "Language",
+
   "welcome": "Welcome",
   "login": "Login",
   "register": "Register",
-  "logout": "Logout"
+  "logout": "Logout",
+
+  "username": "Username",
+  "password": "Password",
+
+  "chat_title": "AI Chat",
+  "choose_ai_mode": "Choose AI Mode",
+  "ask_something": "Ask something",
+  "send": "Send",
+  "enter_question": "Please enter a question",
+  "processing": "Thinking...",
+
+  "login_success": "Login successful",
+  "invalid_credentials": "Invalid credentials",
+  "registered_success": "Registered successfully",
+
+  "user_exists": "User already exists",
+  "registration_failed": "Registration failed",
+  "login_error": "Login error occurred",
+
+  "logged_in_as": "Logged in as",
+  "sidebar_navigation": "Use sidebar navigation",
+  "go_to_sidebar": "Go to sidebar pages to use the app",
+
+  "dashboard": "Dashboard"
 }

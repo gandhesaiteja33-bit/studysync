@@ -1,6 +1,35 @@
 {
+  "app_title": "స్టడీసింక్ AI",
+  "app_caption": "మీ AI ఆధారిత లెర్నింగ్ అసిస్టెంట్",
+
+  "language": "భాష",
+
   "welcome": "స్వాగతం",
   "login": "లాగిన్",
-  "register": "రిజిస్టర్",
-  "logout": "లాగౌట్"
+  "register": "నమోదు",
+  "logout": "లాగౌట్",
+
+  "username": "యూజర్ పేరు",
+  "password": "పాస్‌వర్డ్",
+
+  "chat_title": "AI చాట్",
+  "choose_ai_mode": "AI మోడ్ ఎంచుకోండి",
+  "ask_something": "ఏదైనా అడగండి",
+  "send": "పంపండి",
+  "enter_question": "దయచేసి ప్రశ్న నమోదు చేయండి",
+  "processing": "ఆలోచిస్తోంది...",
+
+  "login_success": "లాగిన్ విజయవంతం",
+  "invalid_credentials": "తప్పు వివరాలు",
+  "registered_success": "విజయవంతంగా నమోదు అయింది",
+
+  "user_exists": "వినియోగదారు ఇప్పటికే ఉన్నారు",
+  "registration_failed": "నమోదు విఫలమైంది",
+  "login_error": "లాగిన్ లో లోపం జరిగింది",
+
+  "logged_in_as": "లాగిన్ అయినది",
+  "sidebar_navigation": "సైడ్బార్ ఉపయోగించండి",
+  "go_to_sidebar": "యాప్ ఉపయోగించడానికి సైడ్బార్ కు వెళ్లండి",
+
+  "dashboard": "డాష్‌బోర్డ్"
 }
