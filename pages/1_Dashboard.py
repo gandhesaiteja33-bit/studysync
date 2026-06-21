@@ -9,11 +9,7 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from database import (
-    get_assignments,
-    get_attendance,
-    get_exams
-)
+from database import get_assignments, get_attendance, get_exams
 
 # ==========================
 # PAGE TITLE
@@ -30,35 +26,14 @@ attendance = get_attendance()
 exams = get_exams()
 
 assignments_df = pd.DataFrame(
-    assignments,
-    columns=[
-        "id",
-        "title",
-        "subject",
-        "due_date",
-        "priority",
-        "status"
-    ]
+    assignments, columns=["id", "title", "subject", "due_date", "priority", "status"]
 )
 
 attendance_df = pd.DataFrame(
-    attendance,
-    columns=[
-        "id",
-        "subject",
-        "conducted",
-        "attended"
-    ]
+    attendance, columns=["id", "subject", "conducted", "attended"]
 )
 
-exams_df = pd.DataFrame(
-    exams,
-    columns=[
-        "id",
-        "subject",
-        "exam_date"
-    ]
-)
+exams_df = pd.DataFrame(exams, columns=["id", "subject", "exam_date"])
 
 # ==========================
 # KPI CARDS
@@ -69,58 +44,34 @@ total_assignments = len(assignments_df)
 pending_assignments = 0
 
 if not assignments_df.empty:
-    pending_assignments = len(
-        assignments_df[
-            assignments_df["status"] == "Pending"
-        ]
-    )
+    pending_assignments = len(assignments_df[assignments_df["status"] == "Pending"])
 
 total_subjects = (
-    len(attendance_df["subject"].unique())
-    if not attendance_df.empty
-    else 0
+    len(attendance_df["subject"].unique()) if not attendance_df.empty else 0
 )
 
 avg_attendance = 0
 
 if not attendance_df.empty:
-
     attendance_df["percentage"] = (
-        attendance_df["attended"]
-        /
-        attendance_df["conducted"]
+        attendance_df["attended"] / attendance_df["conducted"]
     ) * 100
 
-    avg_attendance = round(
-        attendance_df["percentage"].mean(),
-        2
-    )
+    avg_attendance = round(attendance_df["percentage"].mean(), 2)
 
 col1, col2, col3, col4 = st.columns(4)
 
 with col1:
-    st.metric(
-        f"📝 {get_text('assignments')}",
-        total_assignments
-    )
+    st.metric(f"📝 {get_text('assignments')}", total_assignments)
 
 with col2:
-    st.metric(
-        f"⏳ {get_text('pending')}",
-        pending_assignments
-    )
+    st.metric(f"⏳ {get_text('pending')}", pending_assignments)
 
 with col3:
-    st.metric(
-        f"📚 {get_text('subjects')}",
-        total_subjects
-    )
+    st.metric(f"📚 {get_text('subjects')}", total_subjects)
 
 with col4:
-    st.metric(
-        f"📊 {get_text('attendance_percent')}",
-        avg_attendance
-    )
+    st.metric(f"📊 {get_text('attendance_percent')}", avg_attendance)
 
 st.divider()
 
@@ -131,53 +82,28 @@ st.divider()
 colA, colB = st.columns(2)
 
 with colA:
-
-    st.subheader(
-        f"📊 {get_text('assignment_status')}"
-    )
+    st.subheader(f"📊 {get_text('assignment_status')}")
 
     if not assignments_df.empty:
+        fig = px.pie(assignments_df, names="status", title=get_text("assignments"))
 
-        fig = px.pie(
-            assignments_df,
-            names="status",
-            title=get_text("assignments")
-        )
-
-        st.plotly_chart(
-            fig,
-            use_container_width=True
-        )
+        st.plotly_chart(fig, use_container_width=True)
 
     else:
-        st.info(
-            get_text("no_assignments")
-        )
+        st.info(get_text("no_assignments"))
 
 with colB:
-
-    st.subheader(
-        f"📈 {get_text('attendance')}"
-    )
+    st.subheader(f"📈 {get_text('attendance')}")
 
     if not attendance_df.empty:
-
         fig = px.bar(
-            attendance_df,
-            x="subject",
-            y="percentage",
-            title=get_text("attendance")
+            attendance_df, x="subject", y="percentage", title=get_text("attendance")
         )
 
-        st.plotly_chart(
-            fig,
-            use_container_width=True
-        )
+        st.plotly_chart(fig, use_container_width=True)
 
     else:
-        st.info(
-            get_text("no_attendance")
-        )
+        st.info(get_text("no_attendance"))
 
 st.divider()
 
@@ -185,22 +111,13 @@ st.divider()
 # UPCOMING EXAMS
 # ==========================
 
-st.subheader(
-    f"📅 {get_text('upcoming_exams')}"
-)
+st.subheader(f"📅 {get_text('upcoming_exams')}")
 
 if exams_df.empty:
-
-    st.info(
-        get_text("no_exams")
-    )
+    st.info(get_text("no_exams"))
 
 else:
-
-    st.dataframe(
-        exams_df,
-        use_container_width=True
-    )
+    st.dataframe(exams_df, use_container_width=True)
 
 st.divider()
 
@@ -208,19 +125,10 @@ st.divider()
 # ASSIGNMENTS TABLE
 # ==========================
 
-st.subheader(
-    f"📝 {get_text('assignments')}"
-)
+st.subheader(f"📝 {get_text('assignments')}")
 
 if assignments_df.empty:
-
-    st.info(
-        get_text("no_assignments")
-    )
+    st.info(get_text("no_assignments"))
 
 else:
-
-    st.dataframe(
-        assignments_df,
-        use_container_width=True
-    )
+    st.dataframe(assignments_df, use_container_width=True)

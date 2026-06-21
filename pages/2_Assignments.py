@@ -17,40 +17,20 @@ st.title("📝 Assignments")
 st.subheader("➕ Add Assignment")
 
 with st.form("assignment_form"):
+    title = st.text_input("Assignment Title")
 
-    title = st.text_input(
-        "Assignment Title"
-    )
+    subject = st.text_input("Subject")
 
-    subject = st.text_input(
-        "Subject"
-    )
+    due_date = st.date_input("Due Date")
 
-    due_date = st.date_input(
-        "Due Date"
-    )
+    priority = st.selectbox("Priority", ["Low", "Medium", "High"])
 
-    priority = st.selectbox(
-        "Priority",
-        ["Low", "Medium", "High"]
-    )
-
-    submit = st.form_submit_button(
-        "Add Assignment"
-    )
+    submit = st.form_submit_button("Add Assignment")
 
     if submit:
+        add_assignment(title, subject, str(due_date), priority)
 
-        add_assignment(
-            title,
-            subject,
-            str(due_date),
-            priority
-        )
-
-        st.success(
-            "Assignment Added Successfully"
-        )
+        st.success("Assignment Added Successfully")
 
         st.rerun()
 
@@ -65,69 +45,36 @@ st.subheader("📋 Assignment List")
 assignments = get_assignments()
 
 if assignments:
-
     df = pd.DataFrame(
         assignments,
-        columns=[
-            "ID",
-            "Title",
-            "Subject",
-            "Due Date",
-            "Priority",
-            "Status"
-        ]
+        columns=["ID", "Title", "Subject", "Due Date", "Priority", "Status"],
     )
 
-    st.dataframe(
-        df,
-        use_container_width=True
-    )
+    st.dataframe(df, use_container_width=True)
 
     st.divider()
 
     st.subheader("⚙ Assignment Actions")
 
-    assignment_id = st.selectbox(
-        "Select Assignment ID",
-        df["ID"]
-    )
+    assignment_id = st.selectbox("Select Assignment ID", df["ID"])
 
     col1, col2 = st.columns(2)
 
     with col1:
+        if st.button("✅ Mark Complete"):
+            mark_assignment_complete(assignment_id)
 
-        if st.button(
-            "✅ Mark Complete"
-        ):
-
-            mark_assignment_complete(
-                assignment_id
-            )
-
-            st.success(
-                "Assignment Completed"
-            )
+            st.success("Assignment Completed")
 
             st.rerun()
 
     with col2:
+        if st.button("🗑 Delete Assignment"):
+            delete_assignment(assignment_id)
 
-        if st.button(
-            "🗑 Delete Assignment"
-        ):
-
-            delete_assignment(
-                assignment_id
-            )
-
-            st.success(
-                "Assignment Deleted"
-            )
+            st.success("Assignment Deleted")
 
             st.rerun()
 
 else:
-
-    st.info(
-        "No assignments available."
-    )
+    st.info("No assignments available.")

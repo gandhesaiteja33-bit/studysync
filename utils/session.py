@@ -1,5 +1,6 @@
 import streamlit as st
 
+
 def init_session():
     if "language" not in st.session_state:
         st.session_state.language = "English"

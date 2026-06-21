@@ -8,10 +8,13 @@ def register_user(username, password, role="Student"):
         conn = sqlite3.connect(DB_NAME)
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
         INSERT INTO users (username, password, role)
         VALUES (?, ?, ?)
-        """, (username, password, role))
+        """,
+            (username, password, role),
+        )
 
         conn.commit()
         conn.close()
@@ -30,12 +33,15 @@ def login_user(username, password):
         conn = sqlite3.connect(DB_NAME)
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
         SELECT *
         FROM users
         WHERE username = ?
         AND password = ?
-        """, (username, password))
+        """,
+            (username, password),
+        )
 
         user = cursor.fetchone()
         conn.close()

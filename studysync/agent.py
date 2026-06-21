@@ -4,7 +4,6 @@ root_agent = Agent(
     model="gemini-3.5-flash",
     name="studysync_agent",
     description="AI-powered study assistant for students",
-
     instruction="""
     You are StudySync AI.
 
@@ -20,5 +19,5 @@ root_agent = Agent(
     - Step-by-step solutions
     - Examples where useful
     - Student-friendly responses
-    """
+    """,
 )
