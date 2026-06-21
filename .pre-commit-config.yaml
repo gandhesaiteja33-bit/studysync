@@ -19,6 +19,6 @@ repos:
     hooks:
       - id: vulture
         name: vulture
-        entry: vulture .
+        entry: vulture . --exclude venv,.venv,__pycache__
         language: system
         pass_filenames: false
