@@ -1,0 +1,45 @@
+# Git
+
+.git
+.gitignore
+
+# Python
+
+**pycache**/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+
+venv/
+.venv/
+env/
+
+# Environment variables
+
+.env
+.env.*
+
+# Streamlit secrets
+
+.streamlit/secrets.toml
+
+# IDE files
+
+.vscode/
+.idea/
+
+# OS files
+
+.DS_Store
+Thumbs.db
+
+# Logs
+
+*.log
+
+# Build artifacts
+
+dist/
+build/
