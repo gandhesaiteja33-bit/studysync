@@ -1,21 +1,19 @@
-# Task Breakdown
+# Study Planner - Tasks
+
+## Feature: study-planner
 
 ## Completed
-- Project setup
-- Streamlit UI structure
-- ADK integration
-- Basic agent setup
-
-## In Progress
-- Task management module
-- Memory system improvements
-- Tool orchestration
+- Project structure created
+- spec.md added
 
 ## Pending
-- Testing and bug fixes
-- Deployment setup
-- Final documentation
+- Implement task manager
+- Build scheduling logic
+- Add UI for daily planner
+- Integrate progress tracking
 
-## Issues
-- Some linting errors in CI
-- Need to fix Bandit/Pylint warnings
+## In Progress
+- UI design improvements
+
+## Notes
+- Ensure compliance with hackathon feature spec

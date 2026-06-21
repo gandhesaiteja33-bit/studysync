@@ -1,27 +1,28 @@
-# Project Plan
+# Study Planner - Project Plan
 
-## Project Name
-StudySync
+## Feature: study-planner
 
 ## Objective
-To build a smart student productivity platform that helps manage study tasks, notes, and learning workflow.
+Build a smart study planning system that helps students organize daily tasks, study goals, and schedules efficiently.
 
-## Features
-- Task management system
-- Notes organization
-- AI/agent integration
-- Streamlit-based UI
+## Approach
+- Use Streamlit for UI
+- Store tasks locally or in memory
+- Provide daily/weekly planning view
+- Optional AI assistance for scheduling
+
+## Modules
+- Task Manager
+- Schedule Planner
+- Progress Tracker
+
+## Workflow
+1. User adds study tasks
+2. System organizes tasks by priority
+3. Daily plan is generated
+4. User tracks completion
 
 ## Tech Stack
 - Python
 - Streamlit
-- Google ADK (Agent Kit)
-- Ruff, MyPy, Bandit, Flake8 (quality tools)
-
-## Timeline
-- Phase 1: UI + basic features
-- Phase 2: AI agent integration
-- Phase 3: optimization + testing
-
-## Outcome
-A fully working AI-assisted study assistant for students.
+- Optional AI/Agent integration
