@@ -3,6 +3,7 @@ from utils.session import init_session
 init_session()
 from utils.translator import get_text
 from utils.translator import get_text
+from utils.translator import get_text
 
 import pandas as pd
 import plotly.express as px

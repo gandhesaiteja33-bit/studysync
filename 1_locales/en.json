@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "app_title": "StudySync AI",
   "app_caption": "Your AI-powered learning assistant",
 
@@ -32,4 +33,10 @@
   "go_to_sidebar": "Go to sidebar pages to use the app",
 
   "dashboard": "Dashboard"
+=======
+  "welcome": "Welcome",
+  "login": "Login",
+  "register": "Register",
+  "logout": "Logout"
+>>>>>>> 7be08339f0b4bb56e9fa86178491f055a22b52b4
 }
