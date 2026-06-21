@@ -1,15 +1,13 @@
-from utils.session import init_session
-
-init_session()
-from utils.translator import get_text
-from utils.translator import get_text
-from utils.translator import get_text
-
 import pandas as pd
 import plotly.express as px
 import streamlit as st
 
 from database import get_assignments, get_attendance, get_exams
+from utils.session import init_session
+from utils.translator import get_text
+
+# Initialize session
+init_session()
 
 # ==========================
 # PAGE TITLE
