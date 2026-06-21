@@ -15,10 +15,43 @@ repos:
     hooks:
       - id: gitleaks
 
+  # ✅ Add Bandit (security)
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.10
+    hooks:
+      - id: bandit
+        args: ["-x", "venv,.venv,__pycache__"]
+
+  # ✅ Add Flake8 (style check)
+  - repo: https://github.com/PyCQA/flake8
+    rev: 7.1.1
+    hooks:
+      - id: flake8
+
+  # ✅ Add Pylint (code quality)
+  - repo: https://github.com/PyCQA/pylint
+    rev: v3.2.6
+    hooks:
+      - id: pylint
+
+  # ✅ Add Semgrep (security)
+  - repo: https://github.com/semgrep/semgrep
+    rev: v1.73.0
+    hooks:
+      - id: semgrep
+
+  # ✅ Pyupgrade (modern Python syntax)
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v3.15.0
+    hooks:
+      - id: pyupgrade
+        args: ["--py311-plus"]
+
+  # ✅ Vulture (keep yours fixed)
   - repo: local
     hooks:
       - id: vulture
         name: vulture
-        entry: vulture . --exclude venv,.venv,__pycache__
+        entry: vulture .
         language: system
         pass_filenames: false
