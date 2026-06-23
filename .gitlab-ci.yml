@@ -1,3 +1,7 @@
+before_script:
+  - $env:Path += ";C:\Users\gandh\AppData\Local\Programs\Python\Python315"
+  - $env:Path += ";C:\Users\gandh\AppData\Local\Programs\Python\Python315\Scripts"
+  - python --version
 default:
   tags:
     - docker
