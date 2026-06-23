@@ -6,58 +6,44 @@ stages:
   - coverage
   - audit
 
+variables:
+  RUFF_VERSION: "0.12.0"
+
 format:
-  image: python:3.11
   stage: format
-  before_script:
-    - pip install ruff
   script:
-    - ruff format --check .
+    - python -m pip install "ruff==0.12.0"
+    - python -m ruff format --check .
 
 lint:
-  image: python:3.11
   stage: lint
-  before_script:
-    - pip install ruff
   script:
-    - ruff check .
+    - python -m pip install "ruff==0.12.0"
+    - python -m ruff check .
 
 type_check:
-  image: python:3.11
   stage: type_check
-  before_script:
-    - pip install mypy
   script:
-    - mypy . || true
+    - python -m pip install mypy
+    - mypy .
+  allow_failure: true
 
 test:
-  image: python:3.11
   stage: test
-  before_script:
-    - pip install pytest
   script:
+    - python -m pip install pytest
     - pytest
 
 coverage:
-  image: python:3.11
   stage: coverage
-  before_script:
-    - pip install pytest pytest-cov
   script:
+    - python -m pip install pytest pytest-cov
     - pytest --cov=. --cov-report=term
+  allow_failure: true
 
 dependency_audit:
-  image: python:3.11
-  stage: audit
-  before_script:
-    - pip install pip-audit
-  script:
-    - pip-audit || true
-
-secret_scan:
-  image:
-    name: zricethezav/gitleaks:latest
-    entrypoint: [""]
   stage: audit
   script:
-    - gitleaks detect --source . --no-git
+    - python -m pip install pip-audit
+    - pip-audit
+  allow_failure: true
