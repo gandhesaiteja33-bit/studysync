@@ -13,3 +13,4 @@ def local_ai(prompt):
         return data["response"]
 
     return f"Ollama Error: {data}"
+timeout=30.
