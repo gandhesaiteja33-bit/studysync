@@ -51,6 +51,7 @@ coverage:
 dependency_audit:
   stage: audit
   script:
+    - python -m pip install --upgrade pip setuptools
     - python -m pip install pip-audit
     - pip-audit
   allow_failure: true
