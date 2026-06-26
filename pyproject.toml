@@ -1,3 +1,22 @@
+[project]
+name = "studysync"
+version = "0.1.0"
+description = "AI-powered study assistant"
+requires-python = ">=3.11"
+dependencies = [
+    "streamlit",
+    "plotly",
+    "pandas",
+    "numpy",
+    "requests",
+    "bcrypt",
+    "passlib",
+    "python-dotenv",
+    "babel",
+    "ollama",
+    "groq",
+]
+
 [tool.ruff]
 line-length = 88
 target-version = "py311"
